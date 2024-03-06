@@ -7,6 +7,10 @@ import { validateEmail, validatePassword } from "../utils/validations";
 import jwt from "jsonwebtoken";
 import { UserInterface } from "../middlewares/isAuthenticated";
 
+
+
+const role = User;
+
 // CONFIGURE DOTENV
 dotenv.config();
 
@@ -17,7 +21,7 @@ class UserController {
   // SIGNUP
   static async signup(req: UserInterface, res: Response) {
     try {
-      const { name, email, password, image = null, role = "user" } = req.body;
+      const { name, email, password } = req.body;
       let uploadedImage: string = null;
 
       // CHECK IF REQUIRED FIELDS ARE NOT EMPTY
@@ -49,15 +53,12 @@ class UserController {
         });
       }
 
-      // IF IMAGE IS PROVIDED
-      if (image) {
-        const imageUpload = await uploadToCloudinary(image, {
-          ...uploadOptions,
-          public_id: `my-brand/users/${name}`,
-        });
+    
+   
 
-        uploadedImage = imageUpload.secure_url;
-      }
+
+
+        
 
       // HASH PASSWORD
       const hashedPassword = await hashPassword(password);
@@ -73,7 +74,7 @@ class UserController {
 
       // CREATE TOKEN
       const token = jwt.sign(
-        { _id: newUser._id, email: newUser?.email, role: newUser?.role },
+        { _id: newUser._id, email: newUser?.email, /*role: newUser?.role*/ },
         JWT_SECRET,
         { expiresIn: "1d" }
       );
@@ -141,7 +142,7 @@ class UserController {
         {
           _id: userExists._id,
           email: userExists?.email,
-          role: userExists?.role,
+          /*role: userExists?.role,*/
         },
         JWT_SECRET,
         { expiresIn: "1d" }
@@ -258,7 +259,7 @@ class UserController {
         name: name || userExists.name,
         email: email || userExists.email,
         image: uploadedImage || userExists.image,
-        role: role || userExists.role,
+        /*role: role || userExists.role,*/
       }, {
         new: true
       })

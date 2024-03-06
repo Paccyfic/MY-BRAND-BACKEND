@@ -43,12 +43,6 @@
                   },
                   "password": {
                     "example": "any"
-                  },
-                  "image": {
-                    "example": "any"
-                  },
-                  "role": {
-                    "example": "any"
                   }
                 }
               }
