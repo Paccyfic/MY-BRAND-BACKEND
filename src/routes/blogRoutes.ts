@@ -3,6 +3,17 @@ import BlogController from "../controllers/blogController";
 import { isAdmin, isAuthenticated } from "../middlewares/isAuthenticated";
 
 const router: Router = express.Router();
+/**
+ * @openapi
+ * /blogs:
+ *  post:
+ *    tag:
+ *      -Blogs
+ *        description: Responds if the app is up and running
+ *        responses: 
+ *         200
+ *          description: App is up and running
+ */
 
 // CREATE BLOG
 router.post("/", isAuthenticated, isAdmin, BlogController.createBlog);

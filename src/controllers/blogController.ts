@@ -24,13 +24,14 @@ class blogController {
   // CREATE BLOG
   static async createBlog(req: UserInterface, res: Response) {
     try {
+      console.log('Reached createBlog endpoint');
       const { title, body, image = null } = req.body;
       const { user } = req;
 
       // IF USER IS NOT ADMIN
-      if (user?.role !== "admin") {
-        return res.status(401).json({ message: "Unauthorized" });
-      }
+      //if (user?.role !== "admin") {
+      //  return res.status(401).json({ message: "Unauthorized" });
+      //}
 
       // CHECK IF REQUIRED FIELDS ARE NOT EMPTY
       if (!title || !body || !image) {

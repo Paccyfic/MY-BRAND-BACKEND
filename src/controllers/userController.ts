@@ -9,7 +9,7 @@ import { UserInterface } from "../middlewares/isAuthenticated";
 
 
 
-const role = User;
+//const role = User;
 
 // CONFIGURE DOTENV
 dotenv.config();
@@ -53,10 +53,8 @@ class UserController {
         });
       }
 
+      
     
-   
-
-
 
         
 
@@ -69,12 +67,12 @@ class UserController {
         email,
         password: hashedPassword,
         image: uploadedImage,
-        role,
+        //role,
       });
 
       // CREATE TOKEN
       const token = jwt.sign(
-        { _id: newUser._id, email: newUser?.email, role: newUser?.role },
+        { _id: newUser._id, email: newUser?.email, /*role: newUser?.role*/ },
         JWT_SECRET,
         { expiresIn: "1d" }
       );
@@ -142,7 +140,7 @@ class UserController {
         {
           _id: userExists._id,
           email: userExists?.email,
-          role: userExists?.role,
+          // role: userExists?.role,
         },
         JWT_SECRET,
         { expiresIn: "1d" }
@@ -169,7 +167,7 @@ class UserController {
   // LIST ALL USERS
   static async listUsers(req: Request, res: Response) {
     try {
-      const users = await User.find().sort({ createdAt: -1 });
+      const users = await User.find().sort('name email createdAt');
 
       // RETURN USERS
       return res.status(200).json({
@@ -259,7 +257,7 @@ class UserController {
         name: name || userExists.name,
         email: email || userExists.email,
         image: uploadedImage || userExists.image,
-        role: role || userExists.role,
+        /*role: role || userExists.role,*/
       }, {
         new: true
       })
