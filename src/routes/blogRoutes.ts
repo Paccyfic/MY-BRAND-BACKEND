@@ -5,7 +5,7 @@ import { isAdmin, isAuthenticated } from "../middlewares/isAuthenticated";
 const router: Router = express.Router();
 
 // CREATE BLOG
-router.post("/createNewBlog", isAuthenticated, isAdmin, BlogController.createBlog);
+router.post("/", isAuthenticated, isAdmin, BlogController.createBlog);
 
 // LIST BLOGS
 router.get("/", BlogController.listBlogs);
