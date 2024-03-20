@@ -1,11 +1,11 @@
 import express, { Router } from "express";
 import BlogController from "../controllers/blogController";
-import { /*isAdmin,*/ isAuthenticated } from "../middlewares/isAuthenticated";
+import { isAdmin, isAuthenticated } from "../middlewares/isAuthenticated";
 
 const router: Router = express.Router();
 
 // CREATE BLOG
-router.post("/createNewBlog",/* isAuthenticated, isAdmin,*/ BlogController.createBlog);
+router.post("/createNewBlog", isAuthenticated, isAdmin, BlogController.createBlog);
 
 // LIST BLOGS
 router.get("/", BlogController.listBlogs);
@@ -14,10 +14,10 @@ router.get("/", BlogController.listBlogs);
 router.get("/:id", BlogController.getBlog);
 
 // DELETE BLOG
-router.delete("/:id", isAuthenticated, /*isAdmin,*/ BlogController.deleteBlog);
+router.delete("/:id", isAuthenticated, isAdmin, BlogController.deleteBlog);
 
 // UPDATE BLOG
-router.patch("/:id", isAuthenticated, /*isAdmin,*/ BlogController.updateBlog);
+router.patch("/:id", isAuthenticated, isAdmin, BlogController.updateBlog);
 
 // LIKE BLOG
 router.post("/:id/like", isAuthenticated, BlogController.likeBlog);

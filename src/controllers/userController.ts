@@ -22,7 +22,7 @@ class UserController {
   static async signup(req: UserInterface, res: Response) {
     try {
       const { name, email, password } = req.body;
-      let uploadedImage: string = null;
+      let uploadedImage: string |null= null;
 
       // CHECK IF REQUIRED FIELDS ARE NOT EMPTY
       if (!name || !email || !password) {
@@ -73,7 +73,7 @@ class UserController {
       // CREATE TOKEN
       const token = jwt.sign(
         { _id: newUser._id, email: newUser?.email /*, role: newUser?.role*/ },
-        JWT_SECRET,
+        JWT_SECRET as jwt.Secret,
         { expiresIn: "1d" }
       );
 
@@ -142,7 +142,7 @@ class UserController {
           email: userExists?.email,
           //role: userExists?.role,
         },
-        JWT_SECRET,
+        JWT_SECRET as jwt.Secret ,
         { expiresIn: "1d" }
       );
 

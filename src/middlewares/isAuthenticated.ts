@@ -24,7 +24,7 @@ export const isAuthenticated = (req: UserInterface, res: Response, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET as jwt.Secret);
     req.user = decoded;
     next();
   } catch (error) {
