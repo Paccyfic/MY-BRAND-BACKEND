@@ -1,22 +1,11 @@
 import express, { Router } from "express";
 import BlogController from "../controllers/blogController";
-import { isAdmin, isAuthenticated } from "../middlewares/isAuthenticated";
+import { /*isAdmin,*/ isAuthenticated } from "../middlewares/isAuthenticated";
 
 const router: Router = express.Router();
-/**
- * @openapi
- * /blogs:
- *  post:
- *    tag:
- *      -Blogs
- *        description: Responds if the app is up and running
- *        responses: 
- *         200
- *          description: App is up and running
- */
 
 // CREATE BLOG
-router.post("/", isAuthenticated, isAdmin, BlogController.createBlog);
+router.post("/createNewBlog",/* isAuthenticated, isAdmin,*/ BlogController.createBlog);
 
 // LIST BLOGS
 router.get("/", BlogController.listBlogs);
@@ -25,10 +14,10 @@ router.get("/", BlogController.listBlogs);
 router.get("/:id", BlogController.getBlog);
 
 // DELETE BLOG
-router.delete("/:id", isAuthenticated, isAdmin, BlogController.deleteBlog);
+router.delete("/:id", isAuthenticated, /*isAdmin,*/ BlogController.deleteBlog);
 
 // UPDATE BLOG
-router.patch("/:id", isAuthenticated, isAdmin, BlogController.updateBlog);
+router.patch("/:id", isAuthenticated, /*isAdmin,*/ BlogController.updateBlog);
 
 // LIKE BLOG
 router.post("/:id/like", isAuthenticated, BlogController.likeBlog);

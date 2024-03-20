@@ -29,9 +29,9 @@ class blogController {
       const { user } = req;
 
       // IF USER IS NOT ADMIN
-      //if (user?.role !== "admin") {
-      //  return res.status(401).json({ message: "Unauthorized" });
-      //}
+     /*if (user?.role !== "admin") {
+        return res.status(401).json({ message: "Unauthorized" });
+      }*/
 
       // CHECK IF REQUIRED FIELDS ARE NOT EMPTY
       if (!title || !body || !image) {
@@ -138,9 +138,9 @@ class blogController {
       const { user } = req;
 
       // IF USER IS NOT ADMIN
-      if (user?.role !== "admin") {
+      /*if (user?.role !== "admin") {
         return res.status(401).json({ message: "Unauthorized" });
-      }
+      }*/
 
       // DELETE BLOG
       const blog = await Blog.findByIdAndDelete(id);
@@ -167,9 +167,9 @@ class blogController {
       const { title, body, image = null } = req.body;
 
       // IF USER IS NOT ADMIN
-      if (user?.role !== "admin") {
+      /*if (user?.role !== "admin") {
         return res.status(401).json({ message: "Unauthorized" });
-      }
+      }*/
 
       // CHECK IF BLOG EXISTS
       const blogExists = await Blog.findById(id);

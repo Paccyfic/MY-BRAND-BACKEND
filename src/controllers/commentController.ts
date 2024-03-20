@@ -77,9 +77,9 @@ class commentController {
       const { user } = req;
 
       // CHECK IF USER IS ADMIN
-      if (user?.role !== "admin") {
+      /*if (user?.role !== "admin") {
         return res.status(401).json({ message: "Unauthorized" });
-      }
+      }*/
 
       // CHECK IF COMMENT EXISTS
       const commentExists = await Comment.findById(id);

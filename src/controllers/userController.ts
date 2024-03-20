@@ -72,7 +72,7 @@ class UserController {
 
       // CREATE TOKEN
       const token = jwt.sign(
-        { _id: newUser._id, email: newUser?.email, /*role: newUser?.role*/ },
+        { _id: newUser._id, email: newUser?.email /*, role: newUser?.role*/ },
         JWT_SECRET,
         { expiresIn: "1d" }
       );
@@ -140,7 +140,7 @@ class UserController {
         {
           _id: userExists._id,
           email: userExists?.email,
-          // role: userExists?.role,
+          //role: userExists?.role,
         },
         JWT_SECRET,
         { expiresIn: "1d" }
@@ -231,7 +231,7 @@ class UserController {
   static async updateUser(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const { name, email, image = null, role = "user" } = req.body;
+      const { name, email, image = null /*, role = "user"*/ } = req.body;
 
       // CHECK IF USER EXISTS
       const userExists = await User.findById(id);
@@ -257,7 +257,7 @@ class UserController {
         name: name || userExists.name,
         email: email || userExists.email,
         image: uploadedImage || userExists.image,
-        /*role: role || userExists.role,*/
+        //role: role || userExists.role,
       }, {
         new: true
       })

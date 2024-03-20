@@ -21,11 +21,11 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String,
     },
-    role : {
+    /*role : {
         type: String,
         enum: ['user', 'admin'],
         default: 'user',
-    },
+    },*/
     createdAt: {
         type: Date,
         default: Date.now,
