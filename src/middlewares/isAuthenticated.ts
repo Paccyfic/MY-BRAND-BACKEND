@@ -17,7 +17,7 @@ export interface UserInterface extends Request {
 }
 
 export const isAuthenticated = (req: UserInterface, res: Response, next) => {
-   const token = req.headers.authorization?.split(" ")[1];
+   const token = (req.headers.Authorization as string)?.split(" ")[1];
 
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
@@ -34,7 +34,7 @@ export const isAuthenticated = (req: UserInterface, res: Response, next) => {
 
 export const isAdmin = (req: UserInterface, res: Response, next) => {
   if (req.user.role !== "admin") {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Unauthorized; not admin" });
   }
   next();
 };
